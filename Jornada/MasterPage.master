@@ -1,0 +1,180 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Jornadas</title>
+    <link rel="shortcut icon" type="image/png" href="Content/img/Logo_Pequeño.png" />
+
+    <link href="<%= ResolveClientUrl("~/content/css/bootstrap.min.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/fonts/mdi/css/materialdesignicons.min.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/font-awesome/css/font-awesome.min.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/plugins/sweetalert/sweetalert.css") %>" rel="stylesheet">
+
+
+    <link href="<%= ResolveClientUrl("~/content/css/toastr.min.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/bootstrap-datepicker3.min.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/awesome-checkboxes.css") %>" rel="stylesheet">
+   <%-- <link href="<%= ResolveClientUrl("~/content/css/bootstrap-select.css") %>" rel="stylesheet">--%>
+    <link href="<%= ResolveClientUrl("~/content/css/themes/base/autocomplete.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/animate.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/style.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/css/custom.css") %>" rel="stylesheet">
+    <link href="<%= ResolveClientUrl("~/content/js/select2/select2.css") %>" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body class="mini-navbar">
+    <form id="form" runat="server">
+        <asp:ScriptManager ID="MP_ScriptManager" runat="server">
+           
+        </asp:ScriptManager>
+     <asp:UpdateProgress ID="UpdateProgress1" runat="server"  Visible="true" DisplayAfter="5">
+        <ProgressTemplate>
+             <div id="cargando2" class="wrapper-loader fade in" style="display: inline;" >
+            <div class="loader">
+                <div class="loader__figure"></div>
+                <p class="loader__label">Cargando...</p>
+            </div>
+        </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+        
+
+        <!-- Wrapper-->
+        <div id="wrapper">
+            <!-- Top Navbar -->
+            <header>
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <div class="navbar-header">
+                        <a href="/Forms/Default.aspx" class="navbar-brand">
+                            <img src="/Content/img/logo-Jornadas.png" />
+                        </a>
+                    </div>
+                     <%--<div class="navbar-header">
+                        <ul class="nav navbar-top-links navbar-center">
+                            <h1><b>Jornadas</b></h1>
+                        </ul>
+                    </div>--%>
+                    <input name="__RequestVerificationToken" type="hidden" />
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages dropdown-profile dropdown-menu-right">
+                                <li>
+                                    <span class="profile">
+                                        <i id="nombre_Usuario" class="mdi mdi-account-circle mdi-48px pull-left" runat="server"></i>
+                                         <asp:Label ID="lblUsuario" runat="server" Text="Administra"></asp:Label>
+                                          
+                                            <small class="text-muted block"><asp:Label ID="LblArea" runat="server"></asp:Label></small>
+                                    </span>
+
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li><a href="/Account/Manage" title="Editar Perfil"><i class="mdi mdi-account"></i>Editar Perfil</a></li>
+                                <li><a href="/Account/Manage" title="Editar Perfil"><i class="mdi mdi-lock"></i>Configurar Contraseña</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages dropdown-menu-right">
+                                
+                               <asp:LinkButton ID="LinkButton1" runat="server" CssClass="mdi mdi-power-standby" OnClick="logOut">Cerrar Sesión</asp:LinkButton>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </nav>
+            </header>
+            
+            <!-- Navigation -->
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="active">
+                            <a href="/Forms/Default.aspx">
+                                <i class="mdi mdi-desktop-mac"></i>
+                                <span class="nav-label">Inicio </span>
+                            </a>
+                        </li>
+
+                        <!--Aqui-->
+                        <li id="liNav" runat="server"></li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <div id="btnShowHideMenu">
+                <a class="navbar-minimalize btn btn-danger btn-circle" href="#"><i class="mdi mdi-menu"></i></a>
+            </div>
+
+
+
+            <!-- Page wraper -->
+            <section id="page-wrapper" class="page-wrapper">
+                <%--                <div class="col-lg-12">
+                    <div class="wrapper wrapper-content">
+                        <div class="row">--%>
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+                <%--                            <section class="content-wrapper main-content clear-fix">--%>
+                <!-- Main view  -->
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: 30px;">
+
+                        <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+
+
+                    </div>
+                </div>
+
+
+            </section>
+            <!-- End page wrapper-->
+        </div>
+        <!-- End wrapper-->
+
+         </form>
+
+        <!-- Mainly scripts -->
+        <script src="<%= ResolveClientUrl("~/content/js/jquery-2.1.1.min.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/jquery-ui-1.12.1.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/jquery.unobtrusive-ajax.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/js.cookie.min.js") %>"></script>
+
+        <script src="<%= ResolveClientUrl("~/content/js/popper.min.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/bootstrap.min.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/plugins/metisMenu/jquery.metisMenu.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/plugins/slimscroll/jquery.slimscroll.min.js") %>"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script src="<%= ResolveClientUrl("~/content/js/jQuery.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/inspinia.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/plugins/pace/pace.min.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/bootbox.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/bootstrap-datepicker.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/jquery.mask.min.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/bootstrap-select.js") %>"></script>
+        <script src="<%= ResolveClientUrl("~/content/js/select2/select2.full.js") %>"></script>
+
+
+        <asp:ContentPlaceHolder runat="server" ID="cphScript"></asp:ContentPlaceHolder>
+
+   
+
+</body>
+
+</html>
